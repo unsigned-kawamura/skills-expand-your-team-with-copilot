@@ -3,6 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const darkModeToggle = document.getElementById("dark-mode-toggle");
   const themeIcon = document.getElementById("theme-icon");
 
+  // Helper function to update theme icon
+  function updateThemeIcon(isDarkMode) {
+    if (themeIcon) {
+      themeIcon.textContent = isDarkMode ? "☀️" : "🌙";
+    }
+  }
+
   // Check if dark mode elements exist
   if (darkModeToggle && themeIcon) {
     // Check for saved dark mode preference or default to light mode
@@ -13,32 +20,24 @@ document.addEventListener("DOMContentLoaded", () => {
       console.warn("localStorage not available:", e);
     }
     
-    if (currentTheme === "dark") {
+    const isDarkMode = currentTheme === "dark";
+    if (isDarkMode) {
       document.body.classList.add("dark-mode");
-      themeIcon.textContent = "☀️";
-    } else {
-      themeIcon.textContent = "🌙";
     }
+    updateThemeIcon(isDarkMode);
 
     // Dark mode toggle functionality
     darkModeToggle.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
       
       // Update icon and save preference
-      if (document.body.classList.contains("dark-mode")) {
-        themeIcon.textContent = "☀️";
-        try {
-          localStorage.setItem("theme", "dark");
-        } catch (e) {
-          console.warn("Could not save theme preference:", e);
-        }
-      } else {
-        themeIcon.textContent = "🌙";
-        try {
-          localStorage.setItem("theme", "light");
-        } catch (e) {
-          console.warn("Could not save theme preference:", e);
-        }
+      const isDarkMode = document.body.classList.contains("dark-mode");
+      updateThemeIcon(isDarkMode);
+      
+      try {
+        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+      } catch (e) {
+        console.warn("Could not save theme preference:", e);
       }
     });
   }

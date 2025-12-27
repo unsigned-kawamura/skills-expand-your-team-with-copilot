@@ -774,7 +774,7 @@ footer {
 }
 
 /* Adjust user controls position when both toggle and user controls are present */
-#user-controls {
+#dark-mode-toggle ~ #user-controls {
   right: calc(var(--toggle-size, 36px) + var(--toggle-right-margin, 15px) + 10px);
 }
 
