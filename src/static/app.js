@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (currentTheme === "dark") {
     document.body.classList.add("dark-mode");
     themeIcon.textContent = "☀️";
+  } else {
+    themeIcon.textContent = "🌙";
   }
 
   // Dark mode toggle functionality
