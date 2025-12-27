@@ -67,8 +67,11 @@ document.addEventListener("DOMContentLoaded", () => {
       currentTimeRange = activeTimeFilter.dataset.time;
     }
 
-    // Initialize difficulty filter - no filter selected by default
-    currentDifficulty = "";
+    // Initialize difficulty filter - defaults to "All Levels" (empty string)
+    const activeDifficultyFilter = document.querySelector(".difficulty-filter.active");
+    if (activeDifficultyFilter) {
+      currentDifficulty = activeDifficultyFilter.dataset.difficulty;
+    }
   }
 
   // Function to set day filter
