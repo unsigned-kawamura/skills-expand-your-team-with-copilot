@@ -672,26 +672,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Add event listeners to day filter buttons
   dayFilters.forEach((button) => {
     button.addEventListener("click", () => {
-      // Update active class
-      dayFilters.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-
-      // Update current day filter and fetch activities
-      currentDay = button.dataset.day;
-      fetchActivities();
+      setDayFilter(button.dataset.day);
     });
   });
 
   // Add event listeners for time filter buttons
   timeFilters.forEach((button) => {
     button.addEventListener("click", () => {
-      // Update active class
-      timeFilters.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-
-      // Update current time filter and fetch activities
-      currentTimeRange = button.dataset.time;
-      fetchActivities();
+      setTimeRangeFilter(button.dataset.time);
     });
   });
 
