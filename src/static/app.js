@@ -3,28 +3,45 @@ document.addEventListener("DOMContentLoaded", () => {
   const darkModeToggle = document.getElementById("dark-mode-toggle");
   const themeIcon = document.getElementById("theme-icon");
 
-  // Check for saved dark mode preference or default to light mode
-  const currentTheme = localStorage.getItem("theme") || "light";
-  if (currentTheme === "dark") {
-    document.body.classList.add("dark-mode");
-    themeIcon.textContent = "☀️";
-  } else {
-    themeIcon.textContent = "🌙";
-  }
-
-  // Dark mode toggle functionality
-  darkModeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
+  // Check if dark mode elements exist
+  if (darkModeToggle && themeIcon) {
+    // Check for saved dark mode preference or default to light mode
+    let currentTheme = "light";
+    try {
+      currentTheme = localStorage.getItem("theme") || "light";
+    } catch (e) {
+      console.warn("localStorage not available:", e);
+    }
     
-    // Update icon and save preference
-    if (document.body.classList.contains("dark-mode")) {
+    if (currentTheme === "dark") {
+      document.body.classList.add("dark-mode");
       themeIcon.textContent = "☀️";
-      localStorage.setItem("theme", "dark");
     } else {
       themeIcon.textContent = "🌙";
-      localStorage.setItem("theme", "light");
     }
-  });
+
+    // Dark mode toggle functionality
+    darkModeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      
+      // Update icon and save preference
+      if (document.body.classList.contains("dark-mode")) {
+        themeIcon.textContent = "☀️";
+        try {
+          localStorage.setItem("theme", "dark");
+        } catch (e) {
+          console.warn("Could not save theme preference:", e);
+        }
+      } else {
+        themeIcon.textContent = "🌙";
+        try {
+          localStorage.setItem("theme", "light");
+        } catch (e) {
+          console.warn("Could not save theme preference:", e);
+        }
+      }
+    });
+  }
 
   // DOM elements
   const activitiesList = document.getElementById("activities-list");

@@ -749,14 +749,16 @@ footer {
 
 /* Dark mode toggle button */
 #dark-mode-toggle {
+  --toggle-size: 36px;
+  --toggle-right-margin: 15px;
   position: absolute;
   top: 10px;
-  right: 15px;
+  right: var(--toggle-right-margin);
   background-color: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: var(--toggle-size);
+  height: var(--toggle-size);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -773,7 +775,7 @@ footer {
 
 /* Adjust user controls position when both toggle and user controls are present */
 #user-controls {
-  right: 60px; /* Move user controls to the left of the dark mode toggle */
+  right: calc(var(--toggle-size, 36px) + var(--toggle-right-margin, 15px) + 10px);
 }
 
 /* Dark mode specific adjustments */
